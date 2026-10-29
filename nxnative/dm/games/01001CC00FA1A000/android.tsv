@@ -1,0 +1,7 @@
+# Hatsune Miku: Project DIVA MegaMix — Android profile keys.
+# nx2android reads these for packaging and device behaviour.
+
+status	experimental
+tested	not yet
+package	org.nx2a.divamegamix
+orientation	landscape

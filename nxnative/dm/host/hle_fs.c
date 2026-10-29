@@ -439,6 +439,11 @@ HLE_FORCE("_ZN2nn2fs26GetUtf16EntryNameLengthMaxEPbPmPKc", "fsp-srv; host mounts
 HLE_FORCE("_ZN2nn2fs21MountTemporaryStorageEPKc", "fsp-srv; temporary storage → host directory", Result, h_fs_MountTemp, const char *name) {
     char b[1024]; return mount(name, envdir("DM_TEMP", "run/platform/temp", b, sizeof b), 0);
 }
+// SD card debug mount (exlaunch plugin subsdk9 mounts "ExlSD" → the host exlsd directory
+// holding MikuMikuSwitchPlugin/config.toml and the plugin's read/write files)
+HLE_FORCE("_ZN2nn2fs19MountSdCardForDebugEPKc", "fsp-srv; SD card debug mount → DM_EXLSD host directory", Result, h_fs_MountSdCardForDebug, const char *name) {
+    char b[1024]; return mount(name, envdir("DM_EXLSD", "exlsd", b, sizeof b), 0);
+}
 // Cache storage (Tears of the Kingdom; its first list call opened fsp-srv and aborted in sm::Initialize): storage <index> is the host folder <temporary storage>_cache<index>,
 // created when it is created or mounted. The list reports none (a fresh console), so the game creates its storage at every boot; creating an existing one succeeds
 static const char *cache_dir(int index, char *b, size_t n) { char t[1024]; snprintf(b, n, "%s_cache%d", envdir("DM_TEMP", "run/platform/temp", t, sizeof t), index); return b; }

@@ -1,0 +1,43 @@
+# Hatsune Miku: Project DIVA MegaMix (SEGA), Switch.
+# Profile for pjd_m39s_android / nx2android.
+#
+# subsdk9 is the exlaunch plugin loaded as a guest NSO module (not C++ ported):
+#   main, sdk, subsdk0–2 are the game's own modules; subsdk9 is the plugin.
+# patch_nso.py applies patches.py entries whose build ID matches a rewritten
+# module, so patches.py's build ID must match main's NSO build ID exactly.
+
+# ---- Identity ----
+title_id	01001CC00FA1A000
+program_id	01001CC00FA1A000
+
+# ---- App ----
+name	Hatsune Miku: Project DIVA MegaMix
+ipa	ProjectDIVAMegaMix.ipa
+app_category	public.app-category.music-game
+pad_layout	full
+
+# ---- Versions ----
+# One row per version the profile was brought up on.  Build IDs read from the
+# extracted exefs.  patch_nso.py prints each module's build ID during rewrite.
+build	v1.0.0	1.0.0	main=179265bd41f7781dac979e7770201124	sdk=0444aea83c4abc8f12a7ac7ba5c0dd3a	subsdk0=26da039bf496ec900d20b7a05f0ee7f9	subsdk1=721b196b95fde7248f270bdbcad7ac53	subsdk2=0444aea83c4abc8f12a7ac7ba5c0dd3a	subsdk9=a63a19167190045d01d981a93e859fddc2613e2b6af682dbb4f5ef8396ce11f9
+package	179265bd41f7781dac979e7770201124
+shader_versions	179265bd41f7781dac979e7770201124
+
+# ---- Files ----
+modules	main sdk subsdk0 subsdk1 subsdk2 subsdk9
+romfs_marker	re
+zip_store	.arc:.bfstm:.mp4:.szs
+
+# ---- Memory ----
+# Values are Mario's defaults until bring-up measures DIVA MegaMix's actuals.
+mem_reserve	0x100000000
+mem_alias	0x10000000
+mem_stack	0x10000000
+app_pool	0xCD500000
+mem_used	0x4000000
+
+# ---- Shader split ----
+# DIVA MegaMix's shaders live where the exlaunch shader split found them;
+# adjust shader_groups to your extracted RomFS layout.
+shader_groups	/=shaders
+shader_note	DIVA MegaMix shaders
